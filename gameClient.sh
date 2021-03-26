@@ -9,7 +9,7 @@ declare -i id=$1
 idchar=$1
 SOURCE="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
-save="$DISPLAY"          
+save="$DISPLAY"
 declare -i display=44+$id
 value=""
 
@@ -41,7 +41,10 @@ function startUp() {
 }
 
 function checkKey() {
-    if grep -q $1 $2; then
+    if grep -q $1 "$2"; then
+        xdotool keydown $1
+    else
+        xdotool keyup $1
     fi
 }
 
