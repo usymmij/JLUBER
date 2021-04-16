@@ -61,7 +61,7 @@ writeBuffer "booted"
 
 readBuffer
 
-
+python3 ../../scrnsht.py
 #kill the process
 killPs
 

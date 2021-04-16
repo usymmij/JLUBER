@@ -1,7 +1,5 @@
 import gym
 from gym import spaces
-# https://github.com/mherkazandjian/fastgrab
-# use fastgrab to get screenshots
 
 class EggnoggEnv(gym.Env):
     """Eggnogg enviornment that follows gym interface"""
