@@ -1,5 +1,6 @@
 import gym
 from gym import spaces
+import screenshot
 
 class EggnoggEnv(gym.Env):
     """Eggnogg enviornment that follows gym interface"""
