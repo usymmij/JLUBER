@@ -9,16 +9,10 @@ declare -i id=$1
 idchar=$1
 SOURCE="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
-save="$DISPLAY"
-declare -i display=44+$id
 value=""
 
 # save original X display number
-export DISPLAY=:$display
-Xvfb $DISPLAY &
 
-echo instance id: $idchar
-echo display number: $display
 
 # args: The message to write to buffer
 function writeBuffer() {
@@ -26,7 +20,7 @@ function writeBuffer() {
 }
 
 function readBuffer() {
-    value=$(grep "^$id gym " $SOURCE/hello.buffer | tail -1)
+    value=$(grep "^$id gym " $SOURCE/hello.buffer | head -1)
     if [ -n "$value" ]
     then
         grep -v "$value" $SOURCE/hello.buffer > temp && mv temp $SOURCE/hello.buffer
@@ -45,7 +39,7 @@ function checkKey() {
         xdotool keydown "$1"
     fi
     if echo "$2" | grep -q "u $1" ; then
-        xdotool keyup --delay 150 "$1"
+        xdotool keyup --delay 250 "$1"
     fi
 }
 
@@ -62,7 +56,25 @@ readBuffer
 
 for (( ; ; ))
 do
-    
+    readBuffer
+    if [ -n "$value" ]
+    then
+        checkKey "p" "$value"
+
+        checkKey "w" "$value"
+        checkKey "s" "$value"
+        checkKey "a" "$value"
+        checkKey "d" "$value"
+        checkKey "b" "$value"
+        checkKey "v" "$value"
+
+        checkKey "i" "$value"
+        checkKey "j" "$value"
+        checkKey "k" "$value"
+        checkKey "l" "$value"
+        checkKey "n" "$value"
+        checkKey "u" "$value"
+    fi    
 done
 #kill the process
 #killPs

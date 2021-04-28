@@ -2,7 +2,7 @@ import numpy as np
 import mss
 import mss.tools
 import cv2
-
+import time
 
 def screenshot():
     with mss.mss() as sct:
@@ -22,6 +22,11 @@ def screenshot():
 
         # Grab the data
         sct_img = sct.grab(monitor)
-        image = np.array(sct_img)
+        image = np.delete(np.asarray(sct_img),3, 2)
 
         return image
+
+if __name__ == "__main__":
+    cv2.imshow("im", screenshot())
+    cv2.waitKey()
+    cv2.destroyAllWindows()
