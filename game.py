@@ -14,6 +14,7 @@ class Game:
         self.frame = sc.screenshot()
 
     def action(self, keys, player, id):
+        keys = np.asarray(keys)
         if player==1:
             self.inputP1(keys,id)
         else:
@@ -37,18 +38,22 @@ class Game:
 
 
     def toBuffer(self,string):
-        self.f.write(string+"\n")
+        string = string[6:]
+        print(string)
+
+        #self.f.write(string+"\n")
         
     def obs(self):
         self.frame = sc.screenshot()
         return self.frame
 
     def inputP1(self, keys, id):
+        print(keys)
         for k in range(len(keys)):
             if(keys[k] == 1):
-                self.toBuffer(str(id)+" gym "+p1[k])
+                self.toBuffer(str(id)+" gym d "+p1[k])
             else:
-                self.toBuffer(str(id)+" gym "+p1[k])
+                self.toBuffer(str(id)+" gym u "+p1[k])
 
     def inputP2(self, keys, id):
         for k in range(len(keys)):
@@ -58,17 +63,7 @@ class Game:
                 self.toBuffer(str(id)+" gym u "+p2[k])
 
     def reset(self, id):
-        self.toBuffer(str(id)+" gym d p")
-        self.toBuffer(str(id)+" gym d s")
-        self.toBuffer(str(id)+" gym d a")
-        self.toBuffer(str(id)+" gym u p")
-        self.toBuffer(str(id)+" gym u s")
-        self.toBuffer(str(id)+" gym u a")
-        self.toBuffer(str(id)+" gym d w")
-        self.toBuffer(str(id)+" gym d b")
-        self.toBuffer(str(id)+" gym u w")
-        self.toBuffer(str(id)+" gym d b")
-        self.toBuffer(str(id)+" gym u b")
-        self.toBuffer(str(id)+" gym d b")
+        self.toBuffer(str(id)+" gym d F5")
+        self.toBuffer(str(id)+" gym u F5")
         time.sleep(3.5)
     

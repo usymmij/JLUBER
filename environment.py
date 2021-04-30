@@ -23,7 +23,7 @@ class EggnoggEnv(gym.Env):
         # Define action and observation space
         # They must be gym.spaces objects
         # Example when using discrete actions:
-        self.action_space = spaces.MultiDiscrete(6)
+        self.action_space = spaces.MultiBinary(6)
         # Example for using image as input:
         self.observation_space = spaces.Box(
             low=0, high=255, shape=(640, 950, 3)
@@ -33,7 +33,6 @@ class EggnoggEnv(gym.Env):
         self.time_start = time.time()
             
     def step(self, action):
-        
         self.env.action(action, self.p, self.instance)
 
         self.current_step += 1
@@ -58,6 +57,6 @@ class EggnoggEnv(gym.Env):
         return self.obs
         # Reset the state of the enviro1619058245.2927094
 
-    def render(self, mode='human', close=False):
+    def render(self, mode='humwdban', close=False):
         print("score: "+str(self.score))
         #cv2.imshow("window", self.obs)

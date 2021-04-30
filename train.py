@@ -1,17 +1,19 @@
 import gym
 import json
 
-from baselines.common.policies import MlpPolicy
-from baselines.common.vec_env import DummyVecEnv
-from stable_baselines import PPO2
+from stable_baselines3.common.env_checker import check_env
+from stable_baselines3 import PPO
 
 from environment import EggnoggEnv
 from game import Game
 import time
 
-env = DummyVecEnv([lambda: EggnoggEnv()])
+game = Game()
 
-model = PPO2(MlpPolicy, env, verbose=1)
+env = EggnoggEnv(game, 1, 0)
+print(check_env(env))
+
+model = PPO("MlpPolicy", env, verbose=1)
 model.learn(total_timesteps=20000)
 
 obs = env.reset()

@@ -52,29 +52,30 @@ cd $SOURCE"/environment/eggnoggplus-linux/"
 ./eggnoggplus &
 sleep 0.75
 startUp
-readBuffer
+sleep 0.75
 
 for (( ; ; ))
 do
-    readBuffer
-    if [ -n "$value" ]
-    then
-        checkKey "p" "$value"
-
-        checkKey "w" "$value"
-        checkKey "s" "$value"
-        checkKey "a" "$value"
-        checkKey "d" "$value"
-        checkKey "b" "$value"
-        checkKey "v" "$value"
-
-        checkKey "i" "$value"
-        checkKey "j" "$value"
-        checkKey "k" "$value"
-        checkKey "l" "$value"
-        checkKey "n" "$value"
-        checkKey "u" "$value"
-    fi    
+    #readBuffer
+    #if [ -n "$value" ]
+    #then
+    #    echo "$value"
+    #    checkKey "F5" "$value"#
+#
+    #    checkKey "w" "$value"
+    #    checkKey "s" "$value"
+    #    checkKey "a" "$value"
+    #    checkKey "d" "$value"
+    #    checkKey "b" "$value"
+    #    checkKey "v" "$value"#
+#
+    #    checkKey "i" "$value"
+    #    checkKey "j" "$value"
+    #    checkKey "k" "$value"
+    #    checkKey "l" "$value"
+    #    checkKey "n" "$value"
+    #    checkKey "u" "$value"
+    #fi    
 done
 #kill the process
 #killPs

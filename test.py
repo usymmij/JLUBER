@@ -1,17 +1,25 @@
 import gym
 import numpy as np
 
-from baselines.common.vec_env import DummyVecEnv
+from stable_baselines3.common.env_checker import check_env
+from stable_baselines3 import PPO
 
 from environment import EggnoggEnv
 from game import Game
 import time
 
 game = Game()
-env = DummyVecEnv([lambda: EggnoggEnv(game, 1, 0)])
+
+env = EggnoggEnv(game, 1, 0)
+print(check_env(env))
+
+model = PPO("MlpPolicy", env, verbose=1)
+model.learn(total_timesteps=2000)
 time.sleep(3)
+
 obs = env.reset()
-action = [1,0,0,1,0,0]
-for i in range(2000):
-    obs, rewards, done, info = env.step(action)
-    env.render()
+
+#for i in range(2000):
+#    action, _states = model.predict(obs)
+#    obs, rewards, done, info = env.step(action)  
+#    env.render()
