@@ -54,8 +54,11 @@ sleep 0.75
 startUp
 sleep 0.75
 
-for (( ; ; ))
-do
+cd ../..
+python3 train.py
+
+#for (( ; ; ))
+#do
     #readBuffer
     #if [ -n "$value" ]
     #then
@@ -76,7 +79,7 @@ do
     #    checkKey "n" "$value"
     #    checkKey "u" "$value"
     #fi    
-done
+#done
 #kill the process
 #killPs
 

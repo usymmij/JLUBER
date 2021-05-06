@@ -3,6 +3,7 @@ import numpy as np
 import cv2
 import screenshot as sc
 import time
+import subprocess
 
 p1 = ["w", "a", "s", "d", "v", "b"]
 p2 = ["i", "j", "k", "l", "n", "u"]
@@ -33,13 +34,14 @@ class Game:
             winner = 2
         if player==winner:
             return 1
-        else:
+        elif winner==0:
             return 0
+        else:
+            return -1
 
 
-    def toBuffer(self,string):
-        string = string[6:]
-        print(string)
+    def renderKey(self,state, key):
+        subprocess.call(["xdotool", state, key])
 
         #self.f.write(string+"\n")
         
@@ -48,22 +50,25 @@ class Game:
         return self.frame
 
     def inputP1(self, keys, id):
-        print(keys)
         for k in range(len(keys)):
             if(keys[k] == 1):
-                self.toBuffer(str(id)+" gym d "+p1[k])
+                self.renderKey("keydown", p1[k])
             else:
-                self.toBuffer(str(id)+" gym u "+p1[k])
+                self.renderKey("keyup", p1[k])
 
     def inputP2(self, keys, id):
         for k in range(len(keys)):
             if(keys[k] == 1):
-                self.toBuffer(str(id)+" gym d "+p2[k])
+                self.renderKey("keydown", p2[k])
             else:
-                self.toBuffer(str(id)+" gym u "+p2[k])
+                self.renderKey("keyup", p2[k])
 
     def reset(self, id):
-        self.toBuffer(str(id)+" gym d F5")
-        self.toBuffer(str(id)+" gym u F5")
+        for k in p1:
+            self.renderKey("keyup", k)
+        for k in p2:
+            self.renderKey("keyup", k)
+        self.renderKey("keydown", "F5")
+        self.renderKey("keyup", "F5")
         time.sleep(3.5)
     

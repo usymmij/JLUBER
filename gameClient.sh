@@ -21,22 +21,8 @@ echo instance id: $idchar
 echo display number: $display
 
 # args: The message to write to buffer
-function writeBuffer() {
-    echo $id env $1 >> $SOURCE/hello.buffer
-}
-
-function readBuffer() {
-    value=$(grep "^$id gym " $SOURCE/hello.buffer | tail -1)
-    if [ -n "$value" ]
-    then
-        grep -v "$value" $SOURCE/hello.buffer > temp && mv temp $SOURCE/hello.buffer
-    fi
-}
-
-function startUp() {
-    xdotool key --delay 150 "b"
-    sleep 0.3
-    xdotool key --delay 150 "b"
+cd ../..
+py train.py
     sleep 4
 }
 
@@ -58,7 +44,7 @@ cd $SOURCE"/environment/eggnoggplus-linux/"
 ./eggnoggplus &
 sleep 0.75
 startUp
-readBuffer
+sleep 0.5
 
 for (( ; ; ))
 do
@@ -70,6 +56,8 @@ done
 
 
 #for (( ; ; ))
+cd ../..
+py train.py
 #do
 #    
 #    if [ leave ]

@@ -2,6 +2,7 @@ import gym
 from gym import spaces
 from game import Game
 import time
+import cv2
 import numpy as np
 
 class EggnoggEnv(gym.Env):
@@ -40,7 +41,7 @@ class EggnoggEnv(gym.Env):
 
         reward = self.env.reward(self.p)
         self.score = reward
-        done = time.time() - self.time_start > 60
+        done = time.time() - self.time_start > 60 or (reward!=0)
         
 
         return self.obs, reward, done, {}
@@ -50,13 +51,14 @@ class EggnoggEnv(gym.Env):
         self.env.reset(self.instance)
         print("score: "+str(self.score))
         print("step: "+str(self.current_step))
+        print("time: "+str(time.time()-self.time_start))
         self.score = 0
         self.time_start = time.time()
         self.current_step = 0
         self.obs=self.env.obs()
+        cv2.imwrite("obs.png", self.obs)
         return self.obs
-        # Reset the state of the enviro1619058245.2927094
+        # Reset the state of the env
 
-    def render(self, mode='humwdban', close=False):
+    def render(self, mode='human', close=False):
         print("score: "+str(self.score))
-        #cv2.imshow("window", self.obs)
