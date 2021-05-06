@@ -27,9 +27,9 @@ class EggnoggEnv(gym.Env):
         self.action_space = spaces.MultiBinary(6)
         # Example for using image as input:
         self.observation_space = spaces.Box(
-            low=0, high=255, shape=(640, 950, 3)
+            low=0, high=255, shape=(320, 475, 1)
             , dtype=np.uint8)
-        self.obs = np.zeros((960,640,3))
+        self.obs = np.zeros((320,475, 1))
 
         self.time_start = time.time()
             
@@ -41,7 +41,7 @@ class EggnoggEnv(gym.Env):
 
         reward = self.env.reward(self.p)
         self.score = reward
-        done = time.time() - self.time_start > 60 or (reward!=0)
+        done = time.time() - self.time_start > 15 or (reward!=0)
         
 
         return self.obs, reward, done, {}
@@ -56,7 +56,6 @@ class EggnoggEnv(gym.Env):
         self.time_start = time.time()
         self.current_step = 0
         self.obs=self.env.obs()
-        cv2.imwrite("obs.png", self.obs)
         return self.obs
         # Reset the state of the env
 

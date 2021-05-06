@@ -11,7 +11,6 @@ p2 = ["i", "j", "k", "l", "n", "u"]
 class Game:
     def __init__(self):
         room = 0;
-        self.f = open("./hello.buffer", "a")
         self.frame = sc.screenshot()
 
     def action(self, keys, player, id):
@@ -43,11 +42,11 @@ class Game:
     def renderKey(self,state, key):
         subprocess.call(["xdotool", state, key])
 
-        #self.f.write(string+"\n")
         
     def obs(self):
         self.frame = sc.screenshot()
-        return self.frame
+        obs = cv2.cvtColor(cv2.resize(self.frame, (475, 320)), cv2.COLOR_BGR2GRAY)
+        return obs
 
     def inputP1(self, keys, id):
         for k in range(len(keys)):
