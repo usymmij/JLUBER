@@ -13,10 +13,14 @@ game = Game()
 env = EggnoggEnv(game, 1, 0)
 print(check_env(env))
 
-model = PPO("MlpPolicy", env, verbose=1)
-model.learn(total_timesteps=2000)
+# set the screenshot to find the window automatically
+
+model = PPO("CnnPolicy", env, verbose=1)
+model.learn(total_timesteps=1)
 time.sleep(3)
 
+
+model.save("ppo_eggnogg")
 obs = env.reset()
 
 #for i in range(2000):

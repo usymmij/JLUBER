@@ -11,7 +11,9 @@ p2 = ["i", "j", "k", "l", "n", "u"]
 class Game:
     def __init__(self):
         room = 0;
-        self.frame = sc.screenshot()
+        self.top_left = sc.find()
+        print("time to move window over")
+        self.frame = sc.screenshot(self.top_left)
 
     def action(self, keys, player, id):
         keys = np.asarray(keys)
@@ -39,14 +41,13 @@ class Game:
             return -1
 
 
-    def renderKey(self,state, key):
+    def renderKey(self,state,key):
         subprocess.call(["xdotool", state, key])
-
         
     def obs(self):
-        self.frame = sc.screenshot()
+        self.frame = sc.screenshot(self.top_left)
         obs = cv2.cvtColor(cv2.resize(self.frame, (475, 320)), cv2.COLOR_BGR2GRAY)
-        return obs
+        return np.resize(obs, (320,475,1))
 
     def inputP1(self, keys, id):
         for k in range(len(keys)):

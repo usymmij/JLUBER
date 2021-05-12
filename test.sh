@@ -55,7 +55,7 @@ startUp
 sleep 0.75
 
 cd ../..
-python3 train.py
+python3 test.py
 
 #for (( ; ; ))
 #do
